@@ -6,6 +6,7 @@ const EventPage = async ({ params }) => {
   const user = await getCurrentUser()
   const event = await getOneEvent(user.id, params.id)
 
+  // if invalid event ID -> redirect to events page
   if (!event) redirect('/dashboard/events')
 
   return <div>{event.name}</div>

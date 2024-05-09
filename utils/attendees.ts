@@ -30,6 +30,7 @@ export const getAttendeesCountForDashboard = memoize(
     persist: true, // persist across routes - keep it cached until I determine it needs to be refreshed
     revalidateTags: () => ['dashboard:attendees'], // on a mutatation > these are the tags we need to pass to cache bust -- good to put in the constant file to reuse
     // revalidateTags cannot be called by client.
+    // On-demand revalidation allows you to revalidate data based on specific events, such as form submissions or data updates. This ensures the latest data is shown as soon as possible.
     
     suppressWarnings: true, //warnings if we use this in the client
     log: ['datacache', 'verbose', 'dedupe'], // useful for debugging - can be set per env

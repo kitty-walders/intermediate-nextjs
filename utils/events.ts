@@ -38,7 +38,7 @@ export const getEventsForDashboard = memoize(
 export const getAllEvents = memoize(
   async (userId: string) => {
     await delay()
-    return db.query.events.findMany({
+    return db.query.events.findMany({ // drizzle query events table
       where: eq(events.createdById, userId),
       orderBy: [asc(events.startOn)],
     })
@@ -54,13 +54,13 @@ export const getAllEvents = memoize(
 export const getOneEvent = memoize(
   async (userId: string, eventId: string) => {
     await delay()
-    return db.query.events.findFirst({
+    return db.query.events.findFirst({ // drizzle query events table
       where: and(eq(events.createdById, userId), eq(events.id, eventId)),
     })
   },
   {
     persist: true,
-    revalidateTags: (userId, eventId) => ['event', eventId],
+    revalidateTags: (userId, eventId) => ['event', eventId], // only update a single event - others remain cached
     suppressWarnings: true,
     logid: 'event',
   }

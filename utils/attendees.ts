@@ -6,6 +6,10 @@ import { eq, sql } from 'drizzle-orm' // filters for our queries - allows raw SQ
 import { delay } from './delay'
 
 export const getAttendeesCountForDashboard = memoize(
+  // cache does not persist across routes so we need to use this 3rd party lib (unstable-cache for NextJS)
+  // non request based server side cache
+  // requires 2 params (see line 29)
+
   async (userId: string) => {
     await delay() // remove for production
     const counts = await db
@@ -23,10 +27,12 @@ export const getAttendeesCountForDashboard = memoize(
     return total
   },
   {
-    persist: true,
-    revalidateTags: () => ['dashboard:attendees'],
-    suppressWarnings: true,
-    log: ['datacache', 'verbose'],
+    persist: true, // persist across routes - keep it cached until I determine it needs to be refreshed
+    revalidateTags: () => ['dashboard:attendees'], // on a mutatation > these are the tags we need to pass to cache bust -- good to put in the constant file to reuse
+    // revalidateTags cannot be called by client.
+    
+    suppressWarnings: true, //warnings if we use this in the client
+    log: ['datacache', 'verbose', 'dedupe'], // useful for debugging - can be set per env
     logid: 'dashboard:attendees',
   }
 )

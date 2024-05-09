@@ -5,7 +5,7 @@ import Link from 'next/link'
 const Events = async () => {
   const user = await getCurrentUser()
   const events = await getAllEvents(user.id)
-
+  
   return (
     <div>
       {events.map((event) => (

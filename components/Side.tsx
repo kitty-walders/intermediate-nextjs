@@ -24,7 +24,8 @@ const isActive = (path: string, route: string) => {
 }
 const Side = () => {
   const path = usePathname()
-  const activeClass = 'bg-primary hover:bg-primary'
+  const activeClass = 'bg-primary hover:bg-primary' //Tailwind css - sometimes classes not organized correctly causes it to not work
+  // Tailwind CSS only static - not dynamic. Must write out entire class name.
 
   return (
     <div className="w-full h-full px-3 relative">

@@ -3,7 +3,9 @@ import Shell from '@/components/Shell'
 import { usePathname } from 'next/navigation'
 
 const Dashboard = ({ children, rsvps, events }) => {
-  const path = usePathname()
+  // props must match the @folder named components (except children)
+  const path = usePathname() // current client component path string/ route
+  // difficult to get the server component path because it breaks the optimizations of NextJS
 
   return (
     <Shell>
@@ -18,7 +20,7 @@ const Dashboard = ({ children, rsvps, events }) => {
           </div>
         </div>
       ) : (
-        <div>{children}</div>
+        <div>{children}</div> // not every page has the same layout
       )}
     </Shell>
   )

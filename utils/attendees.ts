@@ -1,13 +1,13 @@
 import 'server-only'
-import { db } from '@/db/db'
-import { attendees, events, rsvps } from '@/db/schema'
+import { db } from '@/db/db' // ORM instance in our case drizzle-orm
+import { attendees, events, rsvps } from '@/db/schema' // tables themselves
 import { memoize } from 'nextjs-better-unstable-cache'
-import { eq, sql } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm' // filters for our queries - allows raw SQL
 import { delay } from './delay'
 
 export const getAttendeesCountForDashboard = memoize(
   async (userId: string) => {
-    await delay()
+    await delay() // remove for production
     const counts = await db
       .select({
         totalAttendees: sql`count(distinct ${attendees.id})`,

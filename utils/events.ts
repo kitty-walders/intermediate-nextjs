@@ -9,7 +9,7 @@ export const getEventsForDashboard = memoize(
   async (userId: string) => {
     await delay()
 
-    const data = await db.query.events.findMany({
+    const data = await db.query.events.findMany({ // drizzle query events table
       where: eq(events.createdById, userId),
       columns: {
         id: true,

@@ -23,9 +23,9 @@ export const getRsvpsForDashboard = memoize(
       .selectDistinct()
       .from(attendees)
       .where(inArray(rsvps.eventId, userEventIds))
-      .leftJoin(rsvps, eq(attendees.id, rsvps.attendeeId))
+      .leftJoin(rsvps, eq(attendees.id, rsvps.attendeeId)) // one user can have multiple rsvps
       .leftJoin(events, eq(rsvps.eventId, events.id))
-      .orderBy(desc(rsvps.createdAt))
+      .orderBy(desc(rsvps.createdAt)) // most upcoming rsvp first
       .execute()
 
     return data

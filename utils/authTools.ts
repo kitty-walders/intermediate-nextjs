@@ -85,3 +85,7 @@ export const hashPW = (password: string) => {
 export const comparePW = (password: string, hashedPW: string) => {
   return bcrypt.compare(password, hashedPW)
 }
+
+
+// If you want to clear form data after bad submission: useRef is the best hack. 
+// On default, neight React nor NextJS have a solution for this issue.

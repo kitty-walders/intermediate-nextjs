@@ -1,6 +1,6 @@
 'use client'
 
-import { useFormState } from 'react-dom'
+import { useFormState } from 'react-dom' // comes from react-dom NOT NextJS
 import { Input, Button } from '@nextui-org/react'
 import { registerUser } from '@/actions/auth'
 import Link from 'next/link'
@@ -16,7 +16,7 @@ const SignupForm = () => {
 
   return (
     <form
-      action={action}
+      action={action} // binds to the formState > registerUser
       className="bg-content1 border border-default-100 shadow-lg rounded-md p-3 flex flex-col gap-2 "
     >
       <h3 className="my-4">Sign up</h3>
@@ -29,7 +29,7 @@ const SignupForm = () => {
         placeholder="Password"
         required
       />
-      <Submit label={'signup'} />
+      <Submit label={'signup'} /> {/* Generic Submit button so we can reuse in multiple forms */}
       <div>
         <Link href="/signin">{`Already have an account?`}</Link>
       </div>

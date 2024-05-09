@@ -18,6 +18,6 @@ export const createNewEvent = async () => {
     name: randomName('event', ' '),
   })
 
-  revalidateTag('events')
-  revalidateTag('dashboard:events')
+  revalidateTag('events') // revalidate the events page to make sure it has the latest info
+  revalidateTag('dashboard:events') // need to revalidate the dashboard page as well to make sure it has the latest info
 }

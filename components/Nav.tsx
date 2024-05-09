@@ -7,8 +7,10 @@ import { useTransition } from 'react'
 
 const Nav = () => {
   const [isPending, startTransition] = useTransition()
+  // useTransition is similar to Suspense - request animation frames for states (i.e. smooth animations)
 
   const handleClick = () => {
+    // not asynchornous right now.
     startTransition(() => {
       createNewEvent()
     })
@@ -22,7 +24,7 @@ const Nav = () => {
             isIconOnly
             variant="ghost"
             size="sm"
-            isLoading={isPending}
+            isLoading={isPending} // will show a loading spinner
             onClick={handleClick}
           >
             <CirclePlus size={16} />

@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname === '/') {
-    // not quite working as expected... 
+    // not working as I expect because it is routing to https right now. But go to incognito and try it again
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 }
